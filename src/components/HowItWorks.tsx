@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -9,8 +10,8 @@ const HowItWorks = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
 
-  // GitHub raw video URL
-  const videoUrl = 'https://raw.githubusercontent.com/andyfma2/sonify-peace-maker-page/main/public/Sonify%20Intro%20Video%20.mp4';
+  // GitHub raw video URL (Lifestyle Video Short)
+  const videoUrl = 'https://raw.githubusercontent.com/andyfma2/sonify-peace-maker-page/main/public/Lifestyle%20Video%20Short.mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
@@ -167,3 +168,4 @@ const HowItWorks = () => {
 };
 
 export default HowItWorks;
+
