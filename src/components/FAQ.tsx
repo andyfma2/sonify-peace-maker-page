@@ -1,6 +1,35 @@
+
 import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+
+// Define the FAQs array that was missing
+const faqs = [
+  {
+    question: "How does Sonify's noise cancellation technology work?",
+    answer: "Sonify uses advanced wave interference technology to detect and neutralize disruptive sound waves before they reach your ears. Unlike traditional noise-cancelling headphones, our device works for an entire room."
+  },
+  {
+    question: "Can I control Sonify with my smartphone?",
+    answer: "Yes, Sonify comes with a dedicated mobile app available for iOS and Android. The app allows you to customize settings, set schedules, and monitor noise reduction performance."
+  },
+  {
+    question: "Is installation difficult?",
+    answer: "Not at all! Sonify can be installed in minutes. It can be mounted on walls or ceilings with the included hardware, or you can use the lightbulb socket adapter for even easier installation."
+  },
+  {
+    question: "Does Sonify work for all types of noise?",
+    answer: "Sonify is most effective against consistent ambient noises like traffic, neighbors, HVAC systems, and household appliances. It's less effective against sudden, irregular noises or very loud impact sounds."
+  },
+  {
+    question: "How much area does one Sonify unit cover?",
+    answer: "One Sonify unit effectively covers approximately 200 square feet (about 20 square meters). For larger spaces, we recommend adding additional units for optimal performance."
+  },
+  {
+    question: "Do I need WiFi for Sonify to work?",
+    answer: "Sonify works without WiFi for basic functionality. However, connecting to WiFi enables advanced features like remote control, updates, and integration with smart home systems."
+  }
+];
 
 const FAQ = () => {
   const headerRef = useIntersectionObserver();

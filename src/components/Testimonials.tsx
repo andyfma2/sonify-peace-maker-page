@@ -1,7 +1,36 @@
+
 import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+
+// Define the testimonials array that was missing
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    role: "NYC Apartment Dweller",
+    quote: "Living next to a busy street was unbearable until I installed Sonify. I finally sleep through the night without being woken up by traffic or sirens.",
+    avatar: "SJ"
+  },
+  {
+    name: "Mark Williams",
+    role: "Remote Professional",
+    quote: "Working from home with noisy neighbors was affecting my productivity. Sonify has transformed my home office into a peaceful environment where I can focus.",
+    avatar: "MW"
+  },
+  {
+    name: "Jessica Chen",
+    role: "Parent of 2",
+    quote: "As a mother of two young children, quiet nap times are essential. Sonify has been a game-changer for creating a calm sleeping environment for my kids.",
+    avatar: "JC"
+  },
+  {
+    name: "Robert Patel",
+    role: "Light Sleeper",
+    quote: "I've tried everything from white noise machines to earplugs. Nothing worked until Sonify. It's the only solution that's actually delivered on its promise.",
+    avatar: "RP"
+  }
+];
 
 const Testimonials = () => {
   const headerRef = useIntersectionObserver();

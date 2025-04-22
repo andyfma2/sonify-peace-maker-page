@@ -9,7 +9,11 @@ export const useIntersectionObserver = (options = {}) => {
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        element.classList.add('animate-fade-in');
+        // Add a small delay to make the animations sequential
+        setTimeout(() => {
+          element.classList.add('animate-fade-in');
+          element.style.opacity = '1';
+        }, 100);
         observer.unobserve(element);
       }
     }, {
