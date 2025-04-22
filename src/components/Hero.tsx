@@ -18,7 +18,7 @@ const Hero = () => {
     'Sonify%20Intro%20Video%20.mp4',
     '/Sonify%20Intro%20Video%20.mp4',
     './Sonify%20Intro%20Video%20.mp4',
-    window.location.origin + '/Sonify%20Intro%20Video%20.mp4'
+    window.location.origin + '/public/Sonify%20Intro%20Video%20.mp4'
   ];
 
   useEffect(() => {
