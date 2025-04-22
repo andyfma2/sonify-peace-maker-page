@@ -10,17 +10,63 @@ const Hero = () => {
   const contentRef = useIntersectionObserver();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+
+  // Try different video paths
+  const videoPaths = [
+    'Sonify%20Intro%20Video%20.mp4',
+    '/Sonify%20Intro%20Video%20.mp4',
+    './Sonify%20Intro%20Video%20.mp4',
+    window.location.origin + '/Sonify%20Intro%20Video%20.mp4'
+  ];
 
   useEffect(() => {
-    // Attempt to load and play the video when component mounts
+    // Attempt to fetch the video as a blob
+    const fetchVideo = async () => {
+      for (const path of videoPaths) {
+        try {
+          const response = await fetch(path);
+          if (!response.ok) {
+            console.log(`Failed to fetch from ${path}: ${response.status}`);
+            continue;
+          }
+          
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+          setBlobUrl(url);
+          console.log(`Successfully loaded video from ${path}`);
+          return; // Exit if successful
+        } catch (err) {
+          console.error(`Error fetching video from ${path}:`, err);
+        }
+      }
+      
+      // If we get here, all attempts failed
+      console.error("All video fetch attempts failed");
+      setVideoError(true);
+    };
+
+    fetchVideo();
+
+    return () => {
+      // Clean up blob URL when component unmounts
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // Play the video once we have a blob URL and the element exists
     const videoElement = videoRef.current;
-    if (videoElement) {
+    if (videoElement && blobUrl) {
       const handleCanPlay = () => {
+        setVideoLoaded(true);
         try {
           videoElement.play().catch(err => {
             console.log("Auto-play prevented:", err);
             // Auto-play might be prevented by browser policy
-            // We don't consider this an error
           });
         } catch (err) {
           console.error("Video play error:", err);
@@ -33,7 +79,7 @@ const Hero = () => {
         videoElement.removeEventListener('canplay', handleCanPlay);
       };
     }
-  }, []);
+  }, [blobUrl]);
 
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-champagne-50 overflow-hidden">
@@ -79,7 +125,7 @@ const Hero = () => {
           <div className="w-full flex justify-center items-center">
             <div className="w-full max-w-md rounded-lg shadow-lg overflow-hidden">
               <AspectRatio ratio={16/9} className="bg-gray-100">
-                {videoError ? (
+                {videoError || !blobUrl ? (
                   <div className="flex flex-col items-center justify-center w-full h-full p-4">
                     <img 
                       src="/placeholder.svg" 
@@ -96,14 +142,15 @@ const Hero = () => {
                       playsInline
                       loop
                       poster="/placeholder.svg"
-                      preload="metadata"
+                      preload="auto"
+                      src={blobUrl}
                       onError={(e) => {
                         console.error("Video error:", e);
                         setVideoError(true);
                       }}
+                      onLoadStart={() => console.log("Video load started")}
+                      onLoadedData={() => console.log("Video data loaded")}
                     >
-                      <source src="Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
-                      <source src="/Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
