@@ -33,16 +33,15 @@ const Hero = () => {
               <div>30-Day Money Back Guarantee</div>
             </div>
           </div>
-          <div className="relative">
-            <div className="relative z-10 w-full max-w-md mx-auto aspect-square rounded-full noise-ripple">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-3/4 h-3/4 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden animate-pulse-slow">
-                  <div className="w-[80%] h-[80%] rounded-full bg-sonify-purple/20 flex items-center justify-center">
-                    <div className="w-[60%] h-[60%] rounded-full bg-sonify-purple/40"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="relative aspect-video w-full">
+            <iframe
+              className="w-full h-full rounded-lg shadow-lg"
+              src="https://www.youtube.com/embed/XklgxS108TU?autoplay=1&mute=1&controls=0&loop=1&playlist=XklgxS108TU"
+              title="Sonify Product Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              frameBorder="0"
+              allowFullScreen
+            />
           </div>
         </div>
       </div>
