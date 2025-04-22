@@ -10,38 +10,66 @@ const Hero = () => {
   const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // More robust approach for ensuring video plays
-    const playVideo = () => {
-      if (videoElementRef.current) {
-        // Use a user interaction event to play video
-        const playPromise = videoElementRef.current.play();
+    const videoElement = videoElementRef.current;
+    if (!videoElement) return;
+
+    // Function to attempt playing the video
+    const attemptPlay = () => {
+      if (videoElement.paused) {
+        console.log("Attempting to play hero video");
+        // Setting muted attribute again programmatically (crucial for Safari)
+        videoElement.muted = true;
         
+        // Use low volume as backup if muted doesn't work
+        videoElement.volume = 0.01;
+        
+        const playPromise = videoElement.play();
         if (playPromise !== undefined) {
           playPromise.catch(error => {
-            console.log("Initial autoplay prevented:", error);
-            
-            // Add event listeners to try playing on user interaction
-            const attemptPlayOnUserInteraction = () => {
-              videoElementRef.current?.play().catch(e => console.log("Still couldn't play:", e));
-              // Clean up event listeners after attempt
-              document.removeEventListener('click', attemptPlayOnUserInteraction);
-              document.removeEventListener('touchstart', attemptPlayOnUserInteraction);
-            };
-            
-            document.addEventListener('click', attemptPlayOnUserInteraction, { once: true });
-            document.addEventListener('touchstart', attemptPlayOnUserInteraction, { once: true });
+            console.error("Hero video autoplay failed:", error);
           });
         }
       }
     };
 
-    // Try to play immediately
-    playVideo();
-
-    // Try again after a short delay (gives the DOM more time to initialize)
-    const timeoutId = setTimeout(playVideo, 1000);
-
-    return () => clearTimeout(timeoutId);
+    // Try multiple approaches to ensure video plays
+    
+    // 1. Initial attempt
+    attemptPlay();
+    
+    // 2. Try again after a delay
+    setTimeout(attemptPlay, 1000);
+    
+    // 3. Try on user interaction (fallback)
+    const userInteractionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
+    
+    const playOnUserInteraction = () => {
+      attemptPlay();
+      // Only need one successful interaction
+      userInteractionEvents.forEach(event => {
+        document.removeEventListener(event, playOnUserInteraction);
+      });
+    };
+    
+    userInteractionEvents.forEach(event => {
+      document.addEventListener(event, playOnUserInteraction, { once: true });
+    });
+    
+    // 4. Try when video becomes visible
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        attemptPlay();
+      }
+    }, { threshold: 0.1 });
+    
+    observer.observe(videoElement);
+    
+    return () => {
+      userInteractionEvents.forEach(event => {
+        document.removeEventListener(event, playOnUserInteraction);
+      });
+      if (videoElement) observer.unobserve(videoElement);
+    };
   }, []);
 
   return (
@@ -83,6 +111,7 @@ const Hero = () => {
               loop
               playsInline
               preload="auto"
+              poster="/lovable-uploads/164ec7e6-9781-413e-9eaf-873bfafc4af6.png"
             >
               <source src="/Attempt 4.mp4" type="video/mp4" />
             </video>

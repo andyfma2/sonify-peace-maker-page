@@ -10,50 +10,70 @@ const HowItWorks = () => {
   const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Improved video autoplay handling
-    const playVideo = () => {
-      if (videoElementRef.current) {
-        const playPromise = videoElementRef.current.play();
+    const videoElement = videoElementRef.current;
+    if (!videoElement) return;
+
+    // Function to attempt playing the video
+    const attemptPlay = () => {
+      if (videoElement.paused) {
+        console.log("Attempting to play HowItWorks video");
+        // Setting muted attribute again programmatically (crucial for Safari)
+        videoElement.muted = true;
         
+        // Use low volume as backup if muted doesn't work
+        videoElement.volume = 0.01;
+        
+        const playPromise = videoElement.play();
         if (playPromise !== undefined) {
           playPromise.catch(error => {
-            console.log("Autoplay prevented in HowItWorks:", error);
-            
-            // Add event listeners to try playing on user interaction
-            const attemptPlayOnUserInteraction = () => {
-              videoElementRef.current?.play().catch(e => console.log("Still couldn't play:", e));
-              // Clean up event listeners after attempt
-              document.removeEventListener('click', attemptPlayOnUserInteraction);
-              document.removeEventListener('touchstart', attemptPlayOnUserInteraction);
-            };
-            
-            document.addEventListener('click', attemptPlayOnUserInteraction, { once: true });
-            document.addEventListener('touchstart', attemptPlayOnUserInteraction, { once: true });
+            console.error("HowItWorks video autoplay failed:", error);
           });
         }
       }
     };
 
-    // Try to play immediately
-    playVideo();
-
-    // Also try to play when demo section becomes visible with a more robust approach
-    const observer = new IntersectionObserver((entries) => {
+    // Try multiple approaches to ensure video plays
+    
+    // 1. Initial attempt
+    attemptPlay();
+    
+    // 2. Try again after a delay
+    setTimeout(attemptPlay, 1000);
+    
+    // 3. Try when demo section becomes visible with a more robust approach
+    const demoObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        playVideo();
-        // Try again after a short delay to ensure it works
-        setTimeout(playVideo, 500);
+        attemptPlay();
+        // Try multiple times after becoming visible
+        setTimeout(attemptPlay, 500);
+        setTimeout(attemptPlay, 1500);
       }
     }, { threshold: 0.1 });
 
     if (demoRef.current) {
-      observer.observe(demoRef.current);
+      demoObserver.observe(demoRef.current);
     }
-
+    
+    // 4. Try on user interaction (fallback)
+    const userInteractionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
+    
+    const playOnUserInteraction = () => {
+      attemptPlay();
+      // Only need one successful interaction
+      userInteractionEvents.forEach(event => {
+        document.removeEventListener(event, playOnUserInteraction);
+      });
+    };
+    
+    userInteractionEvents.forEach(event => {
+      document.addEventListener(event, playOnUserInteraction, { once: true });
+    });
+    
     return () => {
-      if (demoRef.current) {
-        observer.unobserve(demoRef.current);
-      }
+      userInteractionEvents.forEach(event => {
+        document.removeEventListener(event, playOnUserInteraction);
+      });
+      if (demoRef.current) demoObserver.unobserve(demoRef.current);
     };
   }, []);
 
@@ -116,6 +136,7 @@ const HowItWorks = () => {
                   loop
                   playsInline
                   preload="auto"
+                  poster="/lovable-uploads/b3a03a33-aeee-4e80-9f55-79910c632c63.png"
                 >
                   <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
                 </video>
