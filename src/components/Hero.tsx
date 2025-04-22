@@ -42,7 +42,7 @@ const Hero = () => {
               loop
               playsInline
             >
-              <source src="/720pWebsite Vid Ratios Fixed.mov" type="video/quicktime" />
+              <source src="/h264 720p.mov" type="video/quicktime" />
             </video>
           </div>
         </div>
