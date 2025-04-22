@@ -14,7 +14,11 @@ const Navbar = () => {
       <div className="container flex items-center justify-between h-16 px-4 md:px-6">
         <div className="flex items-center gap-2">
           <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-sonify-purple flex items-center justify-center text-white font-bold text-lg mr-2">S</div>
+            <img 
+              src="/7289D549-8589-4514-A374-2B8A077512F5_1_105_c.jpeg" 
+              alt="Sonify Logo" 
+              className="w-8 h-8 rounded-full object-cover mr-2" 
+            />
             <span className="text-xl font-semibold">Sonify</span>
           </div>
         </div>
