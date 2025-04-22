@@ -9,8 +9,8 @@ const HowItWorks = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
 
-  // Updated local video path
-  const videoUrl = '/Sonify Intro Video .mp4';
+  // GitHub raw video URL
+  const videoUrl = 'https://raw.githubusercontent.com/andyfma2/sonify-peace-maker-page/main/public/Sonify%20Intro%20Video%20.mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
