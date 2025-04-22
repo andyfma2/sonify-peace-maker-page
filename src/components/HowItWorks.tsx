@@ -60,7 +60,8 @@ const HowItWorks = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
                 <video
-                  src="/Lifestyle Video Short.mp4"
+                  src="/Lifestyle%20Video%20Short.mp4"
+                  type="video/mp4"
                   className="w-full h-auto rounded-lg object-cover bg-black"
                   autoPlay
                   loop
@@ -69,9 +70,14 @@ const HowItWorks = () => {
                   poster="/placeholder.svg"
                   style={{ maxHeight: 320 }}
                   onError={e => {
-                    e.currentTarget.style.display = "none";
-                    if (e.currentTarget.parentElement)
-                      e.currentTarget.parentElement.style.backgroundImage = "url('/placeholder.svg')";
+                    console.error("Lifestyle video failed to load:", e);
+                    const videoElement = e.currentTarget;
+                    videoElement.style.display = "none";
+                    if (videoElement.parentElement) {
+                      videoElement.parentElement.style.backgroundImage = "url('/placeholder.svg')";
+                      videoElement.parentElement.style.backgroundSize = "cover";
+                      videoElement.parentElement.style.backgroundPosition = "center";
+                    }
                   }}
                 />
               </div>

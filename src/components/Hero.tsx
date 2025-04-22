@@ -54,7 +54,8 @@ const Hero = () => {
               <AspectRatio ratio={16/9} className="bg-muted">
                 <video
                   className="w-full h-full object-cover"
-                  src="/Sonify Intro Video .mp4"
+                  src="/Sonify%20Intro%20Video%20.mp4"
+                  type="video/mp4"
                   autoPlay
                   loop
                   muted
@@ -62,10 +63,13 @@ const Hero = () => {
                   poster="/placeholder.svg"
                   onError={(e) => {
                     console.error("Video failed to load:", e);
-                    e.currentTarget.style.display = "none";
-                    e.currentTarget.parentElement.style.backgroundImage = "url('/placeholder.svg')";
-                    e.currentTarget.parentElement.style.backgroundSize = "cover";
-                    e.currentTarget.parentElement.style.backgroundPosition = "center";
+                    const videoElement = e.currentTarget;
+                    videoElement.style.display = "none";
+                    if (videoElement.parentElement) {
+                      videoElement.parentElement.style.backgroundImage = "url('/placeholder.svg')";
+                      videoElement.parentElement.style.backgroundSize = "cover";
+                      videoElement.parentElement.style.backgroundPosition = "center";
+                    }
                   }}
                 />
               </AspectRatio>
