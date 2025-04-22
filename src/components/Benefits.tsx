@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sleep, Music, Wifi } from "lucide-react";
+import { BedDouble, Music, Wifi } from "lucide-react";
 
 const Benefits = () => {
   const benefits = [
     {
       title: 'Enhanced Sleep',
       description: 'Proven to improve sleep duration by 1.5 hours per night with smart wearable integration that protects your deep sleep phases',
-      icon: <Sleep className="h-10 w-10 text-champagne-600" />,
+      icon: <BedDouble className="h-10 w-10 text-champagne-600" />,
       stats: [
         { label: 'Sleep Improvement', value: '1.5hrs' },
         { label: 'Deep Sleep Protection', value: '100%' }
