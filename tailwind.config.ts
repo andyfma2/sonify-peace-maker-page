@@ -67,23 +67,23 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				sonify: {
-					purple: '#967a66',
-					"dark-purple": '#54433c',
-					"light-purple": '#e6dcd4',
-					"accent-purple": '#7d6354',
+					purple: '#403E43',  // Changed to dark grey
+					"dark-purple": '#221F26', // Changed to darker grey
+					"light-purple": '#C8C8C9', // Changed to light grey
+					"accent-purple": '#9F9EA1', // Changed to silver grey
 					gray: '#8E9196'
 				},
 				champagne: {
-					50: '#faf8f6',
-					100: '#f5f0ed',
-					200: '#e6dcd4',
-					300: '#d7c7ba',
-					400: '#c4ad99',
-					500: '#b19580',
-					600: '#967a66',
-					700: '#7d6354',
-					800: '#665147',
-					900: '#54433c'
+					50: '#F6F6F7',
+					100: '#EEEEEF',
+					200: '#C8C8C9',
+					300: '#9F9EA1',
+					400: '#848387',
+					500: '#6A696D',
+					600: '#403E43',
+					700: '#333135',
+					800: '#221F26',
+					900: '#1A181E'
 				}
 			},
 			borderRadius: {
