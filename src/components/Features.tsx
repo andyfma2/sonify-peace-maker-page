@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const Features = () => {
@@ -64,17 +65,22 @@ const Features = () => {
             <div className="w-full aspect-square max-w-md mx-auto relative">
               <div className="absolute inset-0 bg-black/5 rounded-full" style={{ transform: 'scale(1.2)' }}></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/b3a03a33-aeee-4e80-9f55-79910c632c63.png" 
-                  alt="Sonify Sound device" 
-                  className="w-full h-full object-contain"
-                />
+                <div className="w-full h-full rounded-full overflow-hidden">
+                  <img 
+                    src="/lovable-uploads/b3a03a33-aeee-4e80-9f55-79910c632c63.png" 
+                    alt="Sonify Sound device" 
+                    className="w-full h-full object-contain scale-90"
+                    style={{
+                      clipPath: 'circle(50% at center)'
+                    }}
+                  />
+                </div>
               </div>
             </div>
             
             <div className="mt-8 grid grid-cols-2 gap-4">
               <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div className="text-3xl font-bold text-black">8"</div>
+                <div className="text-3xl font-bold text-black">10"</div>
                 <div className="text-sm text-muted-foreground">Diameter</div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm text-center">
@@ -86,7 +92,7 @@ const Features = () => {
                 <div className="text-sm text-muted-foreground">Noise Reduction</div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm text-center">
-                <div className="text-3xl font-bold text-black">8lbs</div>
+                <div className="text-3xl font-bold text-black">7.5lbs</div>
                 <div className="text-sm text-muted-foreground">Weight</div>
               </div>
             </div>
