@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -58,10 +59,20 @@ const HowItWorks = () => {
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
-                <img 
-                  src="/lovable-uploads/b02f2bad-a4db-40b4-856d-ed051980b0c2.png"
-                  alt="Sonify Device"
-                  className="w-full h-auto rounded-lg"
+                <video
+                  src="/Lifestyle Video Short.mp4"
+                  className="w-full h-auto rounded-lg object-cover bg-black"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster="/placeholder.svg"
+                  style={{ maxHeight: 320 }}
+                  onError={e => {
+                    e.currentTarget.style.display = "none";
+                    if (e.currentTarget.parentElement)
+                      e.currentTarget.parentElement.style.backgroundImage = "url('/placeholder.svg')";
+                  }}
                 />
               </div>
               <div className="w-full md:w-1/2">
