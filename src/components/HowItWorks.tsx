@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -9,20 +8,17 @@ const HowItWorks = () => {
   const demoRef = useIntersectionObserver();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // GitHub raw video URL
-  const videoUrl = 'https://raw.githubusercontent.com/yourusername/your-repo/main/Lifestyle%20Video%20Short.mp4';
+  // Updated local video path
+  const videoUrl = '/Sonify Intro Video .mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
       const handleCanPlay = () => {
-        setVideoLoaded(true);
         try {
           videoElement.play().catch(err => {
             console.log("Auto-play prevented:", err);
-            // Auto-play might be prevented by browser policy
           });
         } catch (err) {
           console.error("Video play error:", err);

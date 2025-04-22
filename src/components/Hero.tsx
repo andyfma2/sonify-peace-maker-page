@@ -1,29 +1,24 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Hero = () => {
   const contentRef = useIntersectionObserver();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
-  // GitHub raw video URL
-  const videoUrl = 'https://github.com/andyfma2/sonify-peace-maker-page/blob/main/public/Lifestyle%20Video%20Short.mp4';
+  // Updated local video path
+  const videoUrl = '/Sonify Intro Video .mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
       const handleCanPlay = () => {
-        setVideoLoaded(true);
         try {
           videoElement.play().catch(err => {
             console.log("Auto-play prevented:", err);
-            // Auto-play might be prevented by browser policy
           });
         } catch (err) {
           console.error("Video play error:", err);
