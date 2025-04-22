@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const Hero = () => {
+  const contentRef = useIntersectionObserver();
+  const videoRef = useIntersectionObserver();
+
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-champagne-50 overflow-hidden">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div className="flex flex-col space-y-6 animate-fade-in">
+          <div ref={contentRef} className="flex flex-col space-y-6 opacity-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter">
               Silence Your <span className="text-sonify-purple">Noisy Neighbors</span> Once and For All
             </h1>
@@ -33,7 +37,7 @@ const Hero = () => {
               <div>30-Day Money Back Guarantee</div>
             </div>
           </div>
-          <div className="relative aspect-video w-full">
+          <div ref={videoRef} className="relative aspect-video w-full opacity-0">
             <video
               className="w-full h-full rounded-lg shadow-lg object-cover"
               autoPlay

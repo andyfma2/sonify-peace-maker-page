@@ -1,52 +1,24 @@
-
 import React from 'react';
-import { 
-  Card, 
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      quote: "After months of being woken up by my neighbor's TV, I installed Sonify and now sleep through the night. It's been life-changing!",
-      name: "Sarah J.",
-      role: "Apartment Resident",
-      avatar: "SJ"
-    },
-    {
-      quote: "Working from home became impossible with noisy neighbors. Sonify has made my home office a place where I can actually focus again.",
-      name: "Mark T.",
-      role: "Remote Professional",
-      avatar: "MT"
-    },
-    {
-      quote: "I was skeptical at first, but the difference is remarkable. The device looks great on my wall and has dramatically reduced the noise from next door.",
-      name: "Priya K.",
-      role: "Light Sleeper",
-      avatar: "PK"
-    },
-    {
-      quote: "We have three units in our apartment and the difference is night and day. Worth every penny for the peace of mind it brings.",
-      name: "David L.",
-      role: "Urban Dweller",
-      avatar: "DL"
-    }
-  ];
+  const headerRef = useIntersectionObserver();
+  const testimonialsRef = useIntersectionObserver();
+  const statsRef = useIntersectionObserver();
 
   return (
     <section id="testimonials" className="py-16 md:py-24 bg-slate-50">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+        <div ref={headerRef} className="flex flex-col items-center text-center space-y-4 mb-12 opacity-0">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">What Our Customers Say</h2>
           <p className="text-lg text-muted-foreground max-w-prose">
             Don't just take our word for it - see how Sonify has transformed homes and workspaces.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div ref={testimonialsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-0">
           {testimonials.map((testimonial, index) => (
             <Card key={index} className="border hover:shadow-md transition-shadow duration-300 h-full">
               <CardHeader className="pb-2">
@@ -70,7 +42,7 @@ const Testimonials = () => {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div ref={statsRef} className="mt-12 flex justify-center opacity-0">
           <div className="bg-white p-6 md:p-8 rounded-xl shadow-md max-w-3xl text-center">
             <h3 className="text-xl md:text-2xl font-bold mb-4">Proven Results</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">

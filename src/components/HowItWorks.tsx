@@ -1,7 +1,12 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const HowItWorks = () => {
+  const headerRef = useIntersectionObserver();
+  const cardsRef = useIntersectionObserver();
+  const demoRef = useIntersectionObserver();
+
   const steps = [
     {
       number: '01',
@@ -28,14 +33,14 @@ const HowItWorks = () => {
   return (
     <section id="how-it-works" className="py-16 md:py-24 bg-slate-50">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+        <div ref={headerRef} className="flex flex-col items-center text-center space-y-4 mb-12 opacity-0">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">How Sonify Works</h2>
           <p className="text-lg text-muted-foreground max-w-prose">
             Our innovative approach uses a dual-method technology to both block and mask unwanted noise.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-0">
           {steps.map((step, index) => (
             <Card key={index} className="border-2 hover:border-sonify-purple transition-colors duration-300 h-full">
               <CardHeader className="pb-2">
@@ -49,7 +54,7 @@ const HowItWorks = () => {
           ))}
         </div>
 
-        <div className="mt-16 bg-white rounded-xl shadow-md overflow-hidden">
+        <div ref={demoRef} className="mt-16 bg-white rounded-xl shadow-md overflow-hidden opacity-0">
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">

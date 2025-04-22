@@ -1,11 +1,15 @@
 import React from 'react';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const Features = () => {
+  const contentRef = useIntersectionObserver();
+  const imageRef = useIntersectionObserver();
+
   return (
     <section id="features" className="py-16 md:py-24 bg-secondary">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div ref={contentRef} className="opacity-0">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
               Smart Features & Premium Design
             </h2>
@@ -50,7 +54,7 @@ const Features = () => {
             </div>
           </div>
           
-          <div className="relative">
+          <div ref={imageRef} className="relative opacity-0">
             <div className="w-full aspect-square max-w-md mx-auto relative">
               <div className="absolute inset-0 bg-black/5 rounded-full" style={{ transform: 'scale(1.2)' }}></div>
               <div className="absolute inset-0 flex items-center justify-center">
