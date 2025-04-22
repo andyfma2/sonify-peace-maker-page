@@ -116,7 +116,7 @@ const HowItWorks = () => {
                       preload="metadata"
                       onError={() => setVideoError(true)}
                     >
-                      <source src="/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
+                      <source src="/public/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
                       <source src="Lifestyle%20Video%20Short.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
