@@ -1,16 +1,15 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 const Pricing = () => {
   return (
-    <section id="order-now" className="py-16 md:py-24 bg-gradient-to-br from-white to-sonify-light-purple/20">
+    <section id="order-now" className="py-16 md:py-24 bg-secondary">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center text-center space-y-4 mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Ready to Experience Peace and Quiet?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Transform Your Space Today</h2>
           <p className="text-lg text-muted-foreground max-w-prose">
-            Enjoy a quieter space with our innovative noise reduction solution.
+            Experience premium sound control with Sonify Sound.
           </p>
         </div>
 
@@ -18,7 +17,7 @@ const Pricing = () => {
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-between">
               <div>
-                <h3 className="text-2xl font-bold mb-4">Sonify Noise Reducer</h3>
+                <h3 className="text-2xl font-bold mb-4">Sonify Sound</h3>
                 <div className="flex items-baseline mb-6">
                   <span className="text-4xl font-bold">$400</span>
                   <span className="ml-2 text-muted-foreground">USD</span>
@@ -64,7 +63,7 @@ const Pricing = () => {
               </div>
             </div>
             
-            <div className="md:w-1/2 bg-sonify-purple p-8 md:p-10 text-white flex flex-col justify-between">
+            <div className="md:w-1/2 bg-black p-8 md:p-10 text-white flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-bold mb-4">What's Included</h3>
                 <ul className="space-y-3 mb-8">
@@ -107,7 +106,7 @@ const Pricing = () => {
                 </ul>
               </div>
               
-              <Button size="lg" className="bg-white text-sonify-purple hover:bg-sonify-light-purple transition-colors w-full">
+              <Button size="lg" className="bg-white text-black hover:bg-gray-100 transition-colors w-full">
                 Order Now <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
