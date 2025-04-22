@@ -75,16 +75,16 @@ const Testimonials = () => {
             <h3 className="text-xl md:text-2xl font-bold mb-4">Proven Results</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">
               <div>
-                <div className="text-3xl font-bold text-sonify-purple">1.5hrs</div>
-                <p className="text-sm text-muted-foreground">Average extra sleep per night</p>
+                <div className="text-3xl font-bold text-champagne-600">55%</div>
+                <p className="text-sm text-muted-foreground">Average noise reduction</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-sonify-purple">50%</div>
-                <p className="text-sm text-muted-foreground">Improved perceived quietness</p>
+                <div className="text-3xl font-bold text-champagne-600">1.5hrs</div>
+                <p className="text-sm text-muted-foreground">Extra sleep per night</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-sonify-purple">98%</div>
-                <p className="text-sm text-muted-foreground">Customer satisfaction rate</p>
+                <div className="text-3xl font-bold text-champagne-600">98%</div>
+                <p className="text-sm text-muted-foreground">Customer satisfaction</p>
               </div>
             </div>
           </div>

@@ -1,24 +1,17 @@
-
 import React from 'react';
-import { 
-  Card, 
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const HowItWorks = () => {
   const steps = [
     {
       number: '01',
       title: 'Detect',
-      description: 'Smart sensors detect specific noise patterns coming through your wall'
+      description: 'Smart sensors detect specific noise patterns coming through your walls or ceiling'
     },
     {
       number: '02',
       title: 'Block',
-      description: 'Our device works directly with your wall to reduce sound transfer'
+      description: 'Our device works directly with your wall or ceiling surface to reduce sound transfer'
     },
     {
       number: '03',
@@ -73,22 +66,43 @@ const HowItWorks = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2">
-                <h3 className="text-2xl font-bold mb-4">See the Difference</h3>
-                <p className="text-gray-600 mb-6">
-                  Sonify reduces noise by approximately 8 decibels for common disturbing sounds and improves perceived quietness by around 50%. The device is effective within a typical radius of 3-4 feet, and multiple units can be linked for larger spaces.
-                </p>
+                <h3 className="text-2xl font-bold mb-4">Sound Reduction Performance</h3>
                 <div className="space-y-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded-full bg-sonify-purple"></div>
-                    <p>Reduces noise by ~8 decibels</p>
+                  <div className="relative pt-1">
+                    <div className="flex mb-2 items-center justify-between">
+                      <div className="text-sm font-semibold">Footsteps (Upstairs)</div>
+                      <div className="text-sm font-semibold">80%</div>
+                    </div>
+                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
+                      <div className="w-4/5 h-full bg-champagne-600 rounded"></div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded-full bg-sonify-purple"></div>
-                    <p>Improves perceived quietness by ~50%</p>
+                  <div className="relative pt-1">
+                    <div className="flex mb-2 items-center justify-between">
+                      <div className="text-sm font-semibold">TV Noise (Adjacent)</div>
+                      <div className="text-sm font-semibold">70%</div>
+                    </div>
+                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
+                      <div className="w-[70%] h-full bg-champagne-600 rounded"></div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 rounded-full bg-sonify-purple"></div>
-                    <p>Effective within 3-4 feet radius</p>
+                  <div className="relative pt-1">
+                    <div className="flex mb-2 items-center justify-between">
+                      <div className="text-sm font-semibold">Parties</div>
+                      <div className="text-sm font-semibold">65%</div>
+                    </div>
+                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
+                      <div className="w-[65%] h-full bg-champagne-600 rounded"></div>
+                    </div>
+                  </div>
+                  <div className="relative pt-1">
+                    <div className="flex mb-2 items-center justify-between">
+                      <div className="text-sm font-semibold">Babies Crying</div>
+                      <div className="text-sm font-semibold">55%</div>
+                    </div>
+                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
+                      <div className="w-[55%] h-full bg-champagne-600 rounded"></div>
+                    </div>
                   </div>
                 </div>
               </div>
