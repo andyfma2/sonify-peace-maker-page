@@ -10,34 +10,51 @@ const HowItWorks = () => {
   const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Ensure video plays when component mounts or becomes visible
-    if (videoElementRef.current) {
-      const playVideo = () => {
-        videoElementRef.current?.play().catch(error => {
-          console.log("Autoplay prevented:", error);
-        });
-      };
-
-      // Try to play immediately
-      playVideo();
-
-      // Also try to play when demo section becomes visible
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          playVideo();
+    // Improved video autoplay handling
+    const playVideo = () => {
+      if (videoElementRef.current) {
+        const playPromise = videoElementRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log("Autoplay prevented in HowItWorks:", error);
+            
+            // Add event listeners to try playing on user interaction
+            const attemptPlayOnUserInteraction = () => {
+              videoElementRef.current?.play().catch(e => console.log("Still couldn't play:", e));
+              // Clean up event listeners after attempt
+              document.removeEventListener('click', attemptPlayOnUserInteraction);
+              document.removeEventListener('touchstart', attemptPlayOnUserInteraction);
+            };
+            
+            document.addEventListener('click', attemptPlayOnUserInteraction, { once: true });
+            document.addEventListener('touchstart', attemptPlayOnUserInteraction, { once: true });
+          });
         }
-      }, { threshold: 0.1 });
-
-      if (demoRef.current) {
-        observer.observe(demoRef.current);
       }
+    };
 
-      return () => {
-        if (demoRef.current) {
-          observer.unobserve(demoRef.current);
-        }
-      };
+    // Try to play immediately
+    playVideo();
+
+    // Also try to play when demo section becomes visible with a more robust approach
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        playVideo();
+        // Try again after a short delay to ensure it works
+        setTimeout(playVideo, 500);
+      }
+    }, { threshold: 0.1 });
+
+    if (demoRef.current) {
+      observer.observe(demoRef.current);
     }
+
+    return () => {
+      if (demoRef.current) {
+        observer.unobserve(demoRef.current);
+      }
+    };
   }, []);
 
   const steps = [
@@ -98,6 +115,7 @@ const HowItWorks = () => {
                   muted
                   loop
                   playsInline
+                  preload="auto"
                 >
                   <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
                 </video>

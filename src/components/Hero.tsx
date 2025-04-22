@@ -10,12 +10,38 @@ const Hero = () => {
   const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Ensure video plays when component mounts
-    if (videoElementRef.current) {
-      videoElementRef.current.play().catch(error => {
-        console.log("Autoplay prevented:", error);
-      });
-    }
+    // More robust approach for ensuring video plays
+    const playVideo = () => {
+      if (videoElementRef.current) {
+        // Use a user interaction event to play video
+        const playPromise = videoElementRef.current.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log("Initial autoplay prevented:", error);
+            
+            // Add event listeners to try playing on user interaction
+            const attemptPlayOnUserInteraction = () => {
+              videoElementRef.current?.play().catch(e => console.log("Still couldn't play:", e));
+              // Clean up event listeners after attempt
+              document.removeEventListener('click', attemptPlayOnUserInteraction);
+              document.removeEventListener('touchstart', attemptPlayOnUserInteraction);
+            };
+            
+            document.addEventListener('click', attemptPlayOnUserInteraction, { once: true });
+            document.addEventListener('touchstart', attemptPlayOnUserInteraction, { once: true });
+          });
+        }
+      }
+    };
+
+    // Try to play immediately
+    playVideo();
+
+    // Try again after a short delay (gives the DOM more time to initialize)
+    const timeoutId = setTimeout(playVideo, 1000);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
@@ -56,6 +82,7 @@ const Hero = () => {
               muted
               loop
               playsInline
+              preload="auto"
             >
               <source src="/Attempt 4.mp4" type="video/mp4" />
             </video>
