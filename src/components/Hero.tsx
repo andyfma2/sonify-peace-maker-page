@@ -1,11 +1,20 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const Hero = () => {
   const contentRef = useIntersectionObserver();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
+      });
+    }
+  }, []);
   
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-champagne-50 overflow-hidden">
@@ -37,7 +46,17 @@ const Hero = () => {
               <div>30-Day Money Back Guarantee</div>
             </div>
           </div>
-          <div className="relative aspect-video w-full bg-sonify-purple/10 rounded-lg shadow-lg"></div>
+          <div className="relative aspect-video w-full rounded-lg shadow-lg overflow-hidden">
+            <video 
+              ref={videoRef}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              src="/Attempt 4.mp4"
+            />
+          </div>
         </div>
       </div>
     </section>
