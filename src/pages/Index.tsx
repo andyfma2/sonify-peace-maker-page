@@ -8,6 +8,7 @@ import Features from '@/components/Features';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Pricing from '@/components/Pricing';
+import PreOrderForm from '@/components/PreOrderForm';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
         <Features />
         <Testimonials />
         <FAQ />
+        <PreOrderForm />
         <Pricing />
       </main>
       <Footer />
