@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -34,14 +35,15 @@ const Hero = () => {
             </div>
           </div>
           <div className="relative aspect-video w-full">
-            <iframe
-              className="w-full h-full rounded-lg shadow-lg"
-              src="https://www.youtube.com/embed/XklgxS108TU?autoplay=1&mute=1&controls=0&loop=1&playlist=XklgxS108TU"
-              title="Sonify Product Demo"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              frameBorder="0"
-              allowFullScreen
-            />
+            <video
+              className="w-full h-full rounded-lg shadow-lg object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="/720pWebsite Vid Ratios Fixed.mov" type="video/quicktime" />
+            </video>
           </div>
         </div>
       </div>
