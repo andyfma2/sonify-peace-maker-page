@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -58,7 +57,13 @@ const HowItWorks = () => {
         <div ref={demoRef} className="mt-16 bg-white rounded-xl shadow-md overflow-hidden opacity-0">
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-full md:w-1/2 bg-sonify-purple/10 rounded-lg aspect-video"></div>
+              <div className="w-full md:w-1/2">
+                <img 
+                  src="/lovable-uploads/b02f2bad-a4db-40b4-856d-ed051980b0c2.png"
+                  alt="Sonify Device"
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-bold mb-4">Sound Reduction Performance</h3>
                 <div className="space-y-4">
