@@ -10,56 +10,14 @@ const HowItWorks = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [blobUrl, setBlobUrl] = useState<string | null>(null);
-
-  // Try different video paths
-  const videoPaths = [
-    'Lifestyle%20Video%20Short.mp4',
-    '/Lifestyle%20Video%20Short.mp4',
-    './Lifestyle%20Video%20Short.mp4',
-    window.location.origin + '/Lifestyle%20Video%20Short.mp4'
-  ];
+  
+  // Use a placeholder image instead of trying to load the video that's failing
+  const placeholderImage = "https://images.unsplash.com/photo-1461749280684-dccba630e2f6";
 
   useEffect(() => {
-    // Attempt to fetch the video as a blob
-    const fetchVideo = async () => {
-      for (const path of videoPaths) {
-        try {
-          const response = await fetch(path);
-          if (!response.ok) {
-            console.log(`Failed to fetch from ${path}: ${response.status}`);
-            continue;
-          }
-          
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          setBlobUrl(url);
-          console.log(`Successfully loaded video from ${path}`);
-          return; // Exit if successful
-        } catch (err) {
-          console.error(`Error fetching video from ${path}:`, err);
-        }
-      }
-      
-      // If we get here, all attempts failed
-      console.error("All video fetch attempts failed");
-      setVideoError(true);
-    };
-
-    fetchVideo();
-
-    return () => {
-      // Clean up blob URL when component unmounts
-      if (blobUrl) {
-        URL.revokeObjectURL(blobUrl);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    // Play the video once we have a blob URL and the element exists
+    // We'll use a simpler approach focusing on fallback
     const videoElement = videoRef.current;
-    if (videoElement && blobUrl) {
+    if (videoElement) {
       const handleCanPlay = () => {
         setVideoLoaded(true);
         try {
@@ -71,14 +29,21 @@ const HowItWorks = () => {
           console.error("Video play error:", err);
         }
       };
+      
+      const handleError = () => {
+        console.error("Video failed to load in HowItWorks");
+        setVideoError(true);
+      };
 
       videoElement.addEventListener('canplay', handleCanPlay);
+      videoElement.addEventListener('error', handleError);
       
       return () => {
         videoElement.removeEventListener('canplay', handleCanPlay);
+        videoElement.removeEventListener('error', handleError);
       };
     }
-  }, [blobUrl]);
+  }, []);
 
   const steps = [
     {
@@ -132,10 +97,10 @@ const HowItWorks = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
                 <div className="w-full h-full relative rounded-lg overflow-hidden bg-gray-100" style={{ maxHeight: 320 }}>
-                  {videoError || !blobUrl ? (
+                  {videoError || !videoRef.current ? (
                     <div className="flex items-center justify-center w-full h-full p-4">
                       <img 
-                        src="/placeholder.svg" 
+                        src={placeholderImage}
                         alt="Sonify performance demonstration"
                         className="w-full h-full object-cover" 
                       />
@@ -147,16 +112,12 @@ const HowItWorks = () => {
                       muted
                       playsInline
                       loop
-                      poster="/placeholder.svg"
-                      preload="auto"
-                      src={blobUrl}
-                      onError={(e) => {
-                        console.error("Video error in HowItWorks:", e);
-                        setVideoError(true);
-                      }}
-                      onLoadStart={() => console.log("Video load started")}
-                      onLoadedData={() => console.log("Video data loaded")}
+                      poster={placeholderImage}
+                      preload="metadata"
+                      onError={() => setVideoError(true)}
                     >
+                      <source src="/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
+                      <source src="Lifestyle%20Video%20Short.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   )}
