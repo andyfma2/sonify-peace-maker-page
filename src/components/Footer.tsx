@@ -9,11 +9,10 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img 
-                src="/7289D549-8589-4514-A374-2B8A077512F5_1_105_c.jpeg" 
+                src="/lovable-uploads/164ec7e6-9781-413e-9eaf-873bfafc4af6.png" 
                 alt="Sonify Logo" 
-                className="w-8 h-8 rounded-full object-cover" 
+                className="h-8 w-auto" 
               />
-              <span className="text-xl font-semibold">Sonify</span>
             </div>
             <p className="text-gray-300 mb-4">
               Creating innovative solutions for a quieter, more peaceful living environment.

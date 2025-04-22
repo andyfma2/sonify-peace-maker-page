@@ -1,12 +1,7 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { 
-  Sheet,
-  SheetContent, 
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Navbar = () => {
   return (
@@ -15,11 +10,10 @@ const Navbar = () => {
         <div className="flex items-center gap-2">
           <div className="flex items-center">
             <img 
-              src="/7289D549-8589-4514-A374-2B8A077512F5_1_105_c.jpeg" 
+              src="/lovable-uploads/164ec7e6-9781-413e-9eaf-873bfafc4af6.png" 
               alt="Sonify Logo" 
-              className="w-8 h-8 rounded-full object-cover mr-2" 
+              className="h-8 w-auto mr-2" 
             />
-            <span className="text-xl font-semibold">Sonify</span>
           </div>
         </div>
         
