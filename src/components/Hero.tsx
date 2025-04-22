@@ -46,7 +46,7 @@ const Hero = () => {
               loop
               playsInline
             >
-              <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
+              <source src="/Attempt 4.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

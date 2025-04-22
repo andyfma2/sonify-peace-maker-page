@@ -58,17 +58,14 @@ const HowItWorks = () => {
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
-                <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <div className="flex justify-center mb-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <polygon points="10 8 16 12 10 16 10 8" />
-                      </svg>
-                    </div>
-                    <p>Product demo video</p>
-                  </div>
-                </div>
+                <video
+                  className="w-full h-full rounded-lg shadow-lg object-cover"
+                  autoPlay
+                  muted
+                  playsInline
+                >
+                  <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
+                </video>
               </div>
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-bold mb-4">Sound Reduction Performance</h3>
