@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -7,6 +7,16 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 const Hero = () => {
   const contentRef = useIntersectionObserver();
   const videoRef = useIntersectionObserver();
+  const videoElementRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Ensure video plays when component mounts
+    if (videoElementRef.current) {
+      videoElementRef.current.play().catch(error => {
+        console.log("Autoplay prevented:", error);
+      });
+    }
+  }, []);
 
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-champagne-50 overflow-hidden">
@@ -40,6 +50,7 @@ const Hero = () => {
           </div>
           <div ref={videoRef} className="relative aspect-video w-full opacity-0">
             <video
+              ref={videoElementRef}
               className="w-full h-full rounded-lg shadow-lg object-cover"
               autoPlay
               muted

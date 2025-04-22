@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
@@ -6,6 +7,38 @@ const HowItWorks = () => {
   const headerRef = useIntersectionObserver();
   const cardsRef = useIntersectionObserver();
   const demoRef = useIntersectionObserver();
+  const videoElementRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Ensure video plays when component mounts or becomes visible
+    if (videoElementRef.current) {
+      const playVideo = () => {
+        videoElementRef.current?.play().catch(error => {
+          console.log("Autoplay prevented:", error);
+        });
+      };
+
+      // Try to play immediately
+      playVideo();
+
+      // Also try to play when demo section becomes visible
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          playVideo();
+        }
+      }, { threshold: 0.1 });
+
+      if (demoRef.current) {
+        observer.observe(demoRef.current);
+      }
+
+      return () => {
+        if (demoRef.current) {
+          observer.unobserve(demoRef.current);
+        }
+      };
+    }
+  }, []);
 
   const steps = [
     {
@@ -59,9 +92,11 @@ const HowItWorks = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
                 <video
+                  ref={videoElementRef}
                   className="w-full h-full rounded-lg shadow-lg object-cover"
                   autoPlay
                   muted
+                  loop
                   playsInline
                 >
                   <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
