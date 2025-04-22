@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
@@ -7,75 +7,6 @@ const HowItWorks = () => {
   const headerRef = useIntersectionObserver();
   const cardsRef = useIntersectionObserver();
   const demoRef = useIntersectionObserver();
-  const videoElementRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const videoElement = videoElementRef.current;
-    if (!videoElement) return;
-
-    // Function to attempt playing the video
-    const attemptPlay = () => {
-      if (videoElement.paused) {
-        console.log("Attempting to play HowItWorks video");
-        // Setting muted attribute again programmatically (crucial for Safari)
-        videoElement.muted = true;
-        
-        // Use low volume as backup if muted doesn't work
-        videoElement.volume = 0.01;
-        
-        const playPromise = videoElement.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.error("HowItWorks video autoplay failed:", error);
-          });
-        }
-      }
-    };
-
-    // Try multiple approaches to ensure video plays
-    
-    // 1. Initial attempt
-    attemptPlay();
-    
-    // 2. Try again after a delay
-    setTimeout(attemptPlay, 1000);
-    
-    // 3. Try when demo section becomes visible with a more robust approach
-    const demoObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        attemptPlay();
-        // Try multiple times after becoming visible
-        setTimeout(attemptPlay, 500);
-        setTimeout(attemptPlay, 1500);
-      }
-    }, { threshold: 0.1 });
-
-    if (demoRef.current) {
-      demoObserver.observe(demoRef.current);
-    }
-    
-    // 4. Try on user interaction (fallback)
-    const userInteractionEvents = ['click', 'touchstart', 'keydown', 'scroll'];
-    
-    const playOnUserInteraction = () => {
-      attemptPlay();
-      // Only need one successful interaction
-      userInteractionEvents.forEach(event => {
-        document.removeEventListener(event, playOnUserInteraction);
-      });
-    };
-    
-    userInteractionEvents.forEach(event => {
-      document.addEventListener(event, playOnUserInteraction, { once: true });
-    });
-    
-    return () => {
-      userInteractionEvents.forEach(event => {
-        document.removeEventListener(event, playOnUserInteraction);
-      });
-      if (demoRef.current) demoObserver.unobserve(demoRef.current);
-    };
-  }, []);
 
   const steps = [
     {
@@ -127,20 +58,7 @@ const HowItWorks = () => {
         <div ref={demoRef} className="mt-16 bg-white rounded-xl shadow-md overflow-hidden opacity-0">
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-full md:w-1/2">
-                <video
-                  ref={videoElementRef}
-                  className="w-full h-full rounded-lg shadow-lg object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  poster="/lovable-uploads/b3a03a33-aeee-4e80-9f55-79910c632c63.png"
-                >
-                  <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
-                </video>
-              </div>
+              <div className="w-full md:w-1/2 bg-sonify-purple/10 rounded-lg aspect-video"></div>
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-bold mb-4">Sound Reduction Performance</h3>
                 <div className="space-y-4">
