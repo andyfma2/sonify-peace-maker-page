@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
@@ -7,6 +7,32 @@ const HowItWorks = () => {
   const headerRef = useIntersectionObserver();
   const cardsRef = useIntersectionObserver();
   const demoRef = useIntersectionObserver();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    // Attempt to load and play the video when component mounts
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      const handleCanPlay = () => {
+        try {
+          videoElement.play().catch(err => {
+            console.log("Auto-play prevented:", err);
+            // Auto-play might be prevented by browser policy
+            // We don't consider this an error
+          });
+        } catch (err) {
+          console.error("Video play error:", err);
+        }
+      };
+
+      videoElement.addEventListener('canplay', handleCanPlay);
+      
+      return () => {
+        videoElement.removeEventListener('canplay', handleCanPlay);
+      };
+    }
+  }, []);
 
   const steps = [
     {
@@ -59,45 +85,34 @@ const HowItWorks = () => {
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
-                <div className="w-full h-full relative rounded-lg overflow-hidden bg-black" style={{ maxHeight: 320 }}>
-                  <picture>
-                    {/* Fallback image that will display if video fails */}
-                    <img 
-                      src="/placeholder.svg" 
-                      alt="Sonify performance demonstration" 
-                      className="w-full h-auto object-cover"
-                      style={{ display: 'none' }} 
-                    />
-                  </picture>
-                  <video
-                    className="w-full h-auto object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    poster="/placeholder.svg"
-                    controls={false}
-                    onError={(e) => {
-                      console.error("Video error in HowItWorks:", e.currentTarget.error);
-                      
-                      // Try to show fallback image
-                      e.currentTarget.style.display = "none";
-                      
-                      // Find the fallback image and display it
-                      const parentEl = e.currentTarget.parentElement;
-                      if (parentEl) {
-                        const imgEl = parentEl.querySelector('img');
-                        if (imgEl) {
-                          imgEl.style.display = "block";
-                        }
-                      }
-                    }}
-                  >
-                    {/* Use paths with no spaces, encoded properly for web */}
-                    <source src="/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                <div className="w-full h-full relative rounded-lg overflow-hidden bg-gray-100" style={{ maxHeight: 320 }}>
+                  {videoError ? (
+                    <div className="flex items-center justify-center w-full h-full p-4">
+                      <img 
+                        src="/placeholder.svg" 
+                        alt="Sonify performance demonstration"
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                  ) : (
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover"
+                      muted
+                      playsInline
+                      loop
+                      poster="/placeholder.svg"
+                      preload="metadata"
+                      onError={(e) => {
+                        console.error("Video error in HowItWorks:", e);
+                        setVideoError(true);
+                      }}
+                    >
+                      <source src="Lifestyle%20Video%20Short.mp4" type="video/mp4" />
+                      <source src="/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
               </div>
               <div className="w-full md:w-1/2">

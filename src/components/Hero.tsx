@@ -1,12 +1,39 @@
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Hero = () => {
   const contentRef = useIntersectionObserver();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
+
+  useEffect(() => {
+    // Attempt to load and play the video when component mounts
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      const handleCanPlay = () => {
+        try {
+          videoElement.play().catch(err => {
+            console.log("Auto-play prevented:", err);
+            // Auto-play might be prevented by browser policy
+            // We don't consider this an error
+          });
+        } catch (err) {
+          console.error("Video play error:", err);
+        }
+      };
+
+      videoElement.addEventListener('canplay', handleCanPlay);
+      
+      return () => {
+        videoElement.removeEventListener('canplay', handleCanPlay);
+      };
+    }
+  }, []);
 
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-champagne-50 overflow-hidden">
@@ -50,49 +77,37 @@ const Hero = () => {
           </div>
           {/* Right: Video */}
           <div className="w-full flex justify-center items-center">
-            <div className="w-full max-w-md rounded-lg shadow-lg bg-gray-100 overflow-hidden">
-              <AspectRatio ratio={16/9} className="bg-muted">
-                {/* Using responsive CSS approach */}
-                <div className="relative w-full h-full">
-                  <picture>
-                    {/* Fallback image that will display if video fails */}
+            <div className="w-full max-w-md rounded-lg shadow-lg overflow-hidden">
+              <AspectRatio ratio={16/9} className="bg-gray-100">
+                {videoError ? (
+                  <div className="flex flex-col items-center justify-center w-full h-full p-4">
                     <img 
                       src="/placeholder.svg" 
-                      alt="Sonify product demonstration" 
-                      className="absolute inset-0 w-full h-full object-cover"
-                      style={{ display: 'none' }} 
+                      alt="Sonify product demonstration"
+                      className="w-full h-full object-cover rounded-lg" 
                     />
-                  </picture>
-                  <video
-                    className="absolute inset-0 w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    poster="/placeholder.svg"
-                    controls={false}
-                    onError={(e) => {
-                      console.error("Video error in Hero:", e.currentTarget.error);
-                      
-                      // Try to show fallback image
-                      e.currentTarget.style.display = "none";
-                      
-                      // Find the fallback image and display it
-                      const parentEl = e.currentTarget.parentElement;
-                      if (parentEl) {
-                        const imgEl = parentEl.querySelector('img');
-                        if (imgEl) {
-                          imgEl.style.display = "block";
-                        }
-                      }
-                    }}
-                  >
-                    {/* Use paths with no spaces, encoded properly for web */}
-                    <source src="/Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full bg-gray-100">
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover"
+                      muted
+                      playsInline
+                      loop
+                      poster="/placeholder.svg"
+                      preload="metadata"
+                      onError={(e) => {
+                        console.error("Video error:", e);
+                        setVideoError(true);
+                      }}
+                    >
+                      <source src="Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
+                      <source src="/Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                )}
               </AspectRatio>
             </div>
           </div>
