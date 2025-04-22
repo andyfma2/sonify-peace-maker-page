@@ -12,6 +12,18 @@ const Hero = () => {
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div ref={contentRef} className="flex flex-col space-y-6 opacity-0">
+            {/* Intro Video */}
+            <div className="w-full mb-5 -mt-5">
+              <video
+                className="w-full rounded-lg shadow-lg object-cover"
+                src="/Sonify Intro Video .mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/placeholder.svg"
+              />
+            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tighter">
               Silence Your <span className="text-sonify-purple">Noisy Neighbors</span> Once and For All
             </h1>
@@ -37,7 +49,7 @@ const Hero = () => {
               <div>30-Day Money Back Guarantee</div>
             </div>
           </div>
-          {/* Remove the video section for clean integration */}
+          {/* No video on right side for clean integration */}
         </div>
       </div>
     </section>
