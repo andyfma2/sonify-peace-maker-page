@@ -59,26 +59,35 @@ const HowItWorks = () => {
           <div className="p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
-                <video
-                  src="/Lifestyle%20Video%20Short.mp4"
-                  className="w-full h-auto rounded-lg object-cover bg-black"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster="/placeholder.svg"
-                  style={{ maxHeight: 320 }}
-                  onError={e => {
-                    console.error("Lifestyle video failed to load:", e);
-                    const videoElement = e.currentTarget;
-                    videoElement.style.display = "none";
-                    if (videoElement.parentElement) {
-                      videoElement.parentElement.style.backgroundImage = "url('/placeholder.svg')";
-                      videoElement.parentElement.style.backgroundSize = "cover";
-                      videoElement.parentElement.style.backgroundPosition = "center";
-                    }
-                  }}
-                />
+                <div className="w-full h-full relative rounded-lg overflow-hidden bg-black" style={{ maxHeight: 320 }}>
+                  <video
+                    className="w-full h-auto object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    poster="/placeholder.svg"
+                    controls={false}
+                    onError={(e) => {
+                      console.error("Lifestyle video error:", e);
+                      const target = e.currentTarget;
+                      target.style.display = "none";
+                      
+                      // Try with a different approach after error
+                      const parentEl = target.parentElement;
+                      if (parentEl) {
+                        // Create a fallback background
+                        parentEl.style.backgroundImage = "url('/placeholder.svg')";
+                        parentEl.style.backgroundSize = "cover";
+                        parentEl.style.backgroundPosition = "center";
+                      }
+                    }}
+                  >
+                    <source src="/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               </div>
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-bold mb-4">Sound Reduction Performance</h3>

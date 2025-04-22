@@ -52,25 +52,37 @@ const Hero = () => {
           <div className="w-full flex justify-center items-center">
             <div className="w-full max-w-md rounded-lg shadow-lg bg-gray-100 overflow-hidden">
               <AspectRatio ratio={16/9} className="bg-muted">
-                <video
-                  className="w-full h-full object-cover"
-                  src="/Sonify%20Intro%20Video%20.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster="/placeholder.svg"
-                  onError={(e) => {
-                    console.error("Video failed to load:", e);
-                    const videoElement = e.currentTarget;
-                    videoElement.style.display = "none";
-                    if (videoElement.parentElement) {
-                      videoElement.parentElement.style.backgroundImage = "url('/placeholder.svg')";
-                      videoElement.parentElement.style.backgroundSize = "cover";
-                      videoElement.parentElement.style.backgroundPosition = "center";
-                    }
-                  }}
-                />
+                {/* Using responsive CSS approach */}
+                <div className="relative w-full h-full">
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    poster="/placeholder.svg"
+                    controls={false}
+                    onError={(e) => {
+                      console.error("Video error:", e);
+                      const target = e.currentTarget;
+                      target.style.display = "none";
+                      
+                      // Try with a different approach after error
+                      const parentEl = target.parentElement;
+                      if (parentEl) {
+                        // Create a fallback background
+                        parentEl.style.backgroundImage = "url('/placeholder.svg')";
+                        parentEl.style.backgroundSize = "cover";
+                        parentEl.style.backgroundPosition = "center";
+                      }
+                    }}
+                  >
+                    {/* Add multiple sources for better browser compatibility */}
+                    <source src="/Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               </AspectRatio>
             </div>
           </div>
