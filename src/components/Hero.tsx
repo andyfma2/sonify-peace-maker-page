@@ -13,7 +13,7 @@ const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   // GitHub raw video URL
-  const videoUrl = 'https://raw.githubusercontent.com/yourusername/your-repo/main/Sonify%20Intro%20Video%20.mp4';
+  const videoUrl = 'https://github.com/andyfma2/sonify-peace-maker-page/blob/main/public/Lifestyle%20Video%20Short.mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
