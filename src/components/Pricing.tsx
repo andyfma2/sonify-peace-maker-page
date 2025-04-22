@@ -8,6 +8,11 @@ const Pricing = () => {
   const pricingRef = useIntersectionObserver();
   const featuresRef = useIntersectionObserver();
 
+  const scrollToPreOrder = () => {
+    const preOrderSection = document.querySelector('#pre-order');
+    preOrderSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="order-now" className="py-16 md:py-24 bg-secondary">
       <div className="container px-4 md:px-6">
@@ -111,7 +116,7 @@ const Pricing = () => {
                 </ul>
               </div>
               
-              <Button size="lg" className="bg-white text-black hover:bg-gray-100 transition-colors w-full">
+              <Button size="lg" className="bg-white text-black hover:bg-gray-100 transition-colors w-full" onClick={scrollToPreOrder}>
                 Order Now <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>

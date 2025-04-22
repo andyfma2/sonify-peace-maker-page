@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useToast } from "@/hooks/use-toast"
 import { Input } from "@/components/ui/input"
@@ -27,7 +26,7 @@ const PreOrderForm = () => {
   };
 
   return (
-    <section className="py-16 bg-secondary">
+    <section id="pre-order" className="py-16 bg-secondary">
       <div className="container px-4 md:px-6">
         <div ref={formRef} className="max-w-md mx-auto text-center space-y-8 opacity-0">
           <div className="space-y-2">
