@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -45,7 +46,7 @@ const Hero = () => {
               loop
               playsInline
             >
-              <source src="/Attempt 4.mp4" type="video/mp4" />
+              <source src="/Lifestyle Vid Sonify.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
