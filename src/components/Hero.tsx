@@ -54,31 +54,41 @@ const Hero = () => {
               <AspectRatio ratio={16/9} className="bg-muted">
                 {/* Using responsive CSS approach */}
                 <div className="relative w-full h-full">
+                  <picture>
+                    {/* Fallback image that will display if video fails */}
+                    <img 
+                      src="/placeholder.svg" 
+                      alt="Sonify product demonstration" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={{ display: 'none' }} 
+                    />
+                  </picture>
                   <video
                     className="absolute inset-0 w-full h-full object-cover"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     poster="/placeholder.svg"
                     controls={false}
                     onError={(e) => {
-                      console.error("Video error:", e);
-                      const target = e.currentTarget;
-                      target.style.display = "none";
+                      console.error("Video error in Hero:", e.currentTarget.error);
                       
-                      // Try with a different approach after error
-                      const parentEl = target.parentElement;
+                      // Try to show fallback image
+                      e.currentTarget.style.display = "none";
+                      
+                      // Find the fallback image and display it
+                      const parentEl = e.currentTarget.parentElement;
                       if (parentEl) {
-                        // Create a fallback background
-                        parentEl.style.backgroundImage = "url('/placeholder.svg')";
-                        parentEl.style.backgroundSize = "cover";
-                        parentEl.style.backgroundPosition = "center";
+                        const imgEl = parentEl.querySelector('img');
+                        if (imgEl) {
+                          imgEl.style.display = "block";
+                        }
                       }
                     }}
                   >
-                    {/* Add multiple sources for better browser compatibility */}
+                    {/* Use paths with no spaces, encoded properly for web */}
                     <source src="/Sonify%20Intro%20Video%20.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>

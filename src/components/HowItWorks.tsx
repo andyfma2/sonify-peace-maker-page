@@ -60,30 +60,41 @@ const HowItWorks = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="w-full md:w-1/2">
                 <div className="w-full h-full relative rounded-lg overflow-hidden bg-black" style={{ maxHeight: 320 }}>
+                  <picture>
+                    {/* Fallback image that will display if video fails */}
+                    <img 
+                      src="/placeholder.svg" 
+                      alt="Sonify performance demonstration" 
+                      className="w-full h-auto object-cover"
+                      style={{ display: 'none' }} 
+                    />
+                  </picture>
                   <video
                     className="w-full h-auto object-cover"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     poster="/placeholder.svg"
                     controls={false}
                     onError={(e) => {
-                      console.error("Lifestyle video error:", e);
-                      const target = e.currentTarget;
-                      target.style.display = "none";
+                      console.error("Video error in HowItWorks:", e.currentTarget.error);
                       
-                      // Try with a different approach after error
-                      const parentEl = target.parentElement;
+                      // Try to show fallback image
+                      e.currentTarget.style.display = "none";
+                      
+                      // Find the fallback image and display it
+                      const parentEl = e.currentTarget.parentElement;
                       if (parentEl) {
-                        // Create a fallback background
-                        parentEl.style.backgroundImage = "url('/placeholder.svg')";
-                        parentEl.style.backgroundSize = "cover";
-                        parentEl.style.backgroundPosition = "center";
+                        const imgEl = parentEl.querySelector('img');
+                        if (imgEl) {
+                          imgEl.style.display = "block";
+                        }
                       }
                     }}
                   >
+                    {/* Use paths with no spaces, encoded properly for web */}
                     <source src="/Lifestyle%20Video%20Short.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
