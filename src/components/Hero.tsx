@@ -19,15 +19,15 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-anthropic-slate-dark/90 to-anthropic-slate-dark/70" />
       </div>
       
-      {/* Content positioned lower on the page */}
-      <div className="relative container px-4 md:px-6 flex items-end min-h-screen pb-32">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Content positioned higher on the page with increased width */}
+      <div className="relative container px-4 md:px-6 flex items-start min-h-screen pt-32">
+        <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter mb-6">
-            Silence Your{' '}
+            <span className="text-anthropic-ivory-light">Silence Your</span>{' '}
             <span className="text-anthropic-manilla">Noisy Neighbors</span>{' '}
             <span className="text-anthropic-ivory-light">Once and For All</span>
           </h1>
-          <p className="text-xl md:text-2xl text-anthropic-cloud-light max-w-2xl mx-auto mb-8">
+          <p className="text-xl md:text-2xl text-anthropic-cloud-light max-w-4xl mx-auto mb-8">
             Sonify creates peace in your space by both blocking and masking noise through walls. Enjoy a quieter home or office without expensive renovations.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
