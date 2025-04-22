@@ -61,7 +61,6 @@ const HowItWorks = () => {
               <div className="w-full md:w-1/2">
                 <video
                   src="/Lifestyle%20Video%20Short.mp4"
-                  type="video/mp4"
                   className="w-full h-auto rounded-lg object-cover bg-black"
                   autoPlay
                   loop

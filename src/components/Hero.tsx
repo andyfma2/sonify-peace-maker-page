@@ -55,7 +55,6 @@ const Hero = () => {
                 <video
                   className="w-full h-full object-cover"
                   src="/Sonify%20Intro%20Video%20.mp4"
-                  type="video/mp4"
                   autoPlay
                   loop
                   muted
