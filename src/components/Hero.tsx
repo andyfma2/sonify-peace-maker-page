@@ -1,39 +1,32 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
   const contentRef = useIntersectionObserver();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const isMobile = useIsMobile();
 
-  // Using relative path for better compatibility
-  const videoUrl = '/Sonify Intro Video .mp4';
+  // GitHub raw video URL
+  const videoUrl = 'https://raw.githubusercontent.com/andyfma2/sonify-peace-maker-page/main/public/Sonify%20Intro%20Video%20.mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
       const handleCanPlay = () => {
-        setVideoLoaded(true);
-        if (!isMobile) {
-          try {
-            videoElement.play().catch(err => {
-              console.log("Auto-play prevented:", err);
-            });
-          } catch (err) {
-            console.error("Video play error:", err);
-          }
+        try {
+          videoElement.play().catch(err => {
+            console.log("Auto-play prevented:", err);
+          });
+        } catch (err) {
+          console.error("Video play error:", err);
         }
       };
 
-      const handleError = (e: Event) => {
-        console.error("Video error in Hero:", e);
+      const handleError = () => {
+        console.error("Video error in Hero");
         setVideoError(true);
       };
 
@@ -45,19 +38,7 @@ const Hero = () => {
         videoElement.removeEventListener('error', handleError);
       };
     }
-  }, [isMobile]);
-
-  const handleVideoClick = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play().catch(err => {
-          console.log("Play on click prevented:", err);
-        });
-      } else {
-        videoRef.current.pause();
-      }
-    }
-  };
+  }, []);
 
   return (
     <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-champagne-50 overflow-hidden">
@@ -123,20 +104,9 @@ const Hero = () => {
                       preload="auto"
                       src={videoUrl}
                       onError={() => setVideoError(true)}
-                      onClick={handleVideoClick}
                     >
                       Your browser does not support the video tag.
                     </video>
-                    {isMobile && videoRef.current?.paused && (
-                      <div 
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
-                        onClick={handleVideoClick}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
-                      </div>
-                    )}
                   </div>
                 )}
               </AspectRatio>

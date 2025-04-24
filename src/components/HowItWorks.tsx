@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const HowItWorks = () => {
   const headerRef = useIntersectionObserver();
@@ -10,30 +9,25 @@ const HowItWorks = () => {
   const demoRef = useIntersectionObserver();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const isMobile = useIsMobile();
 
-  // Using relative path for better compatibility
-  const videoUrl = '/Lifestyle Video Short.mp4';
+  // GitHub raw video URL (Lifestyle Video Short)
+  const videoUrl = 'https://raw.githubusercontent.com/andyfma2/sonify-peace-maker-page/main/public/Lifestyle%20Video%20Short.mp4';
 
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
       const handleCanPlay = () => {
-        setVideoLoaded(true);
-        if (!isMobile) {
-          try {
-            videoElement.play().catch(err => {
-              console.log("Auto-play prevented:", err);
-            });
-          } catch (err) {
-            console.error("Video play error:", err);
-          }
+        try {
+          videoElement.play().catch(err => {
+            console.log("Auto-play prevented:", err);
+          });
+        } catch (err) {
+          console.error("Video play error:", err);
         }
       };
 
-      const handleError = (e: Event) => {
-        console.error("Video error in HowItWorks:", e);
+      const handleError = () => {
+        console.error("Video error in HowItWorks");
         setVideoError(true);
       };
 
@@ -45,19 +39,7 @@ const HowItWorks = () => {
         videoElement.removeEventListener('error', handleError);
       };
     }
-  }, [isMobile]);
-
-  const handleVideoClick = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play().catch(err => {
-          console.log("Play on click prevented:", err);
-        });
-      } else {
-        videoRef.current.pause();
-      }
-    }
-  };
+  }, []);
 
   const steps = [
     {
@@ -120,32 +102,19 @@ const HowItWorks = () => {
                       />
                     </div>
                   ) : (
-                    <div className="relative">
-                      <video
-                        ref={videoRef}
-                        className="w-full h-full object-cover"
-                        muted
-                        playsInline
-                        loop
-                        poster="/placeholder.svg"
-                        preload="auto"
-                        src={videoUrl}
-                        onError={() => setVideoError(true)}
-                        onClick={handleVideoClick}
-                      >
-                        Your browser does not support the video tag.
-                      </video>
-                      {isMobile && videoRef.current?.paused && (
-                        <div 
-                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
-                          onClick={handleVideoClick}
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                          </svg>
-                        </div>
-                      )}
-                    </div>
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover"
+                      muted
+                      playsInline
+                      loop
+                      poster="/placeholder.svg"
+                      preload="auto"
+                      src={videoUrl}
+                      onError={() => setVideoError(true)}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
                   )}
                 </div>
               </div>
@@ -199,3 +168,4 @@ const HowItWorks = () => {
 };
 
 export default HowItWorks;
+
