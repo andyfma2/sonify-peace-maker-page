@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -107,6 +106,7 @@ const HowItWorks = () => {
                       className="w-full h-full object-cover"
                       muted
                       playsInline
+                      autoPlay
                       loop
                       poster="/placeholder.svg"
                       preload="auto"
@@ -168,4 +168,3 @@ const HowItWorks = () => {
 };
 
 export default HowItWorks;
-

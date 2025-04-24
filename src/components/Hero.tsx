@@ -99,6 +99,7 @@ const Hero = () => {
                       className="w-full h-full object-cover"
                       muted
                       playsInline
+                      autoPlay
                       loop
                       poster="/placeholder.svg"
                       preload="auto"
