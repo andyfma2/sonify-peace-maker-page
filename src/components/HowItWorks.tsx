@@ -135,7 +135,7 @@ const HowItWorks = () => {
                       >
                         Your browser does not support the video tag.
                       </video>
-                      {isMobile && !videoRef.current?.playing && (
+                      {isMobile && videoRef.current?.paused && (
                         <div 
                           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
                           onClick={handleVideoClick}
