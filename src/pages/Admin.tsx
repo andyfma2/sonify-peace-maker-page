@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast"
 import { Button } from "@/components/ui/button"
+import { PreOrderEmail } from '@/types/database';
 import {
   Table,
   TableBody,
@@ -15,7 +16,7 @@ import {
 import { LogOut } from "lucide-react"
 
 const Admin = () => {
-  const [emails, setEmails] = React.useState<any[]>([]);
+  const [emails, setEmails] = React.useState<PreOrderEmail[]>([]);
   const [session, setSession] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
   const { toast } = useToast();
@@ -34,8 +35,8 @@ const Admin = () => {
   }, []);
 
   const fetchEmails = async () => {
-    const { data, error } = await supabase
-      .from('pre_order_emails')
+    const { data, error } = await (supabase
+      .from('pre_order_emails') as any)
       .select('*')
       .order('created_at', { ascending: false });
 
