@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { useToast } from "@/hooks/use-toast"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { supabase } from "@/integrations/supabase/client";
 
 const PreOrderForm = () => {
   const [email, setEmail] = React.useState('');
@@ -14,14 +16,31 @@ const PreOrderForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // For now, just show a success message
-    // This should be replaced with actual backend integration once Supabase is connected
-    toast({
-      title: "Thank you for your interest!",
-      description: "We'll notify you when orders open on May 28th.",
-    });
+    const { error } = await supabase
+      .from('pre_order_emails')
+      .insert([{ email }]);
+
+    if (error) {
+      if (error.code === '23505') {
+        toast({
+          title: "Already registered",
+          description: "This email is already registered for updates.",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to register your email. Please try again.",
+        });
+      }
+    } else {
+      toast({
+        title: "Thank you for your interest!",
+        description: "We'll notify you when orders open on May 28th.",
+      });
+      setEmail('');
+    }
     
-    setEmail('');
     setIsSubmitting(false);
   };
 
