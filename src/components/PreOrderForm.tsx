@@ -16,33 +16,43 @@ const PreOrderForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Cast the entire operation to any to bypass TypeScript errors
-    const { error } = await supabase
-      .from('pre_order_emails')
-      .insert([{ email }]) as unknown as { error: any };
+    try {
+      // Use a more generic approach with explicit typing
+      const { error } = await supabase
+        .from('pre_order_emails')
+        .insert([{ email }]) as { error: { code: string, message: string } | null };
 
-    if (error) {
-      if (error.code === '23505') {
-        toast({
-          title: "Already registered",
-          description: "This email is already registered for updates.",
-        });
+      if (error) {
+        if (error.code === '23505') {
+          toast({
+            title: "Already registered",
+            description: "This email is already registered for updates.",
+          });
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Failed to register your email. Please try again.",
+          });
+          console.error("Error storing email:", error);
+        }
       } else {
         toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Failed to register your email. Please try again.",
+          title: "Thank you for your interest!",
+          description: "We'll notify you when orders open on May 28th.",
         });
+        setEmail('');
       }
-    } else {
+    } catch (err) {
+      console.error("Exception occurred:", err);
       toast({
-        title: "Thank you for your interest!",
-        description: "We'll notify you when orders open on May 28th.",
+        variant: "destructive",
+        title: "Error",
+        description: "Something went wrong. Please try again.",
       });
-      setEmail('');
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
   };
 
   return (

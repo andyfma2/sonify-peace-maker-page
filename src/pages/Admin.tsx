@@ -35,25 +35,36 @@ const Admin = () => {
   }, []);
 
   const fetchEmails = async () => {
-    // Cast the entire operation to any to bypass TypeScript errors
-    const { data, error } = await supabase
-      .from('pre_order_emails')
-      .select('*')
-      .order('created_at', { ascending: false }) as unknown as { 
-        data: PreOrderEmail[] | null;
-        error: any;
-      };
+    try {
+      // Use a more generic approach with explicit typing
+      const { data, error } = await supabase
+        .from('pre_order_emails')
+        .select('*')
+        .order('created_at', { ascending: false }) as { 
+          data: PreOrderEmail[] | null;
+          error: { message: string } | null;
+        };
 
-    if (error) {
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to fetch emails",
+        });
+        console.error("Error fetching emails:", error);
+      } else {
+        setEmails(data || []);
+      }
+    } catch (err) {
+      console.error("Exception occurred:", err);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to fetch emails",
+        description: "Something went wrong. Please try again.",
       });
-    } else {
-      setEmails(data || []);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleLogout = async () => {
