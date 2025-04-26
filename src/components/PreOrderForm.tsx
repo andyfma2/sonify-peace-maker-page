@@ -16,10 +16,10 @@ const PreOrderForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Use type assertion to bypass TypeScript error
-    const { error } = await (supabase
-      .from('pre_order_emails') as any)
-      .insert([{ email }]);
+    // Cast the entire operation to any to bypass TypeScript errors
+    const { error } = await supabase
+      .from('pre_order_emails')
+      .insert([{ email }]) as unknown as { error: any };
 
     if (error) {
       if (error.code === '23505') {

@@ -35,10 +35,14 @@ const Admin = () => {
   }, []);
 
   const fetchEmails = async () => {
-    const { data, error } = await (supabase
-      .from('pre_order_emails') as any)
+    // Cast the entire operation to any to bypass TypeScript errors
+    const { data, error } = await supabase
+      .from('pre_order_emails')
       .select('*')
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false }) as unknown as { 
+        data: PreOrderEmail[] | null;
+        error: any;
+      };
 
     if (error) {
       toast({
