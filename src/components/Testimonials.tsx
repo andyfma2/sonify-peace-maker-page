@@ -41,8 +41,8 @@ const Testimonials = () => {
     <section id="testimonials" className="py-16 md:py-24 bg-slate-50">
       <div className="container px-4 md:px-6">
         <div ref={headerRef} className="flex flex-col items-center text-center space-y-4 mb-12 opacity-0">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">What Our Customers Say</h2>
-          <p className="text-lg text-muted-foreground max-w-prose">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-dark">What Our Customers Say</h2>
+          <p className="text-lg text-slate-medium max-w-prose">
             Don't just take our word for it - see how Sonify has transformed homes and workspaces.
           </p>
         </div>
@@ -56,15 +56,15 @@ const Testimonials = () => {
                 </svg>
               </CardHeader>
               <CardContent>
-                <p className="text-lg italic mb-4">{testimonial.quote}</p>
+                <p className="text-lg italic mb-4 text-slate-dark">{testimonial.quote}</p>
               </CardContent>
               <CardFooter className="flex items-center gap-4 pt-2">
                 <Avatar>
                   <AvatarFallback className="bg-sonify-purple text-white">{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h4 className="font-semibold">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <h4 className="font-semibold text-slate-dark">{testimonial.name}</h4>
+                  <p className="text-sm text-slate-medium">{testimonial.role}</p>
                 </div>
               </CardFooter>
             </Card>
@@ -73,19 +73,19 @@ const Testimonials = () => {
 
         <div ref={statsRef} className="mt-12 flex justify-center opacity-0">
           <div className="bg-white p-6 md:p-8 rounded-xl shadow-md max-w-3xl text-center">
-            <h3 className="text-xl md:text-2xl font-bold mb-4">Proven Results</h3>
+            <h3 className="text-xl md:text-2xl font-bold mb-4 text-slate-dark">Proven Results</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">
               <div>
-                <div className="text-3xl font-bold text-champagne-600">55%</div>
-                <p className="text-sm text-muted-foreground">Average noise reduction</p>
+                <div className="text-3xl font-bold text-slate-dark">55%</div>
+                <p className="text-sm text-slate-medium">Average noise reduction</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-champagne-600">1.5hrs</div>
-                <p className="text-sm text-muted-foreground">Extra sleep per night</p>
+                <div className="text-3xl font-bold text-slate-dark">1.5hrs</div>
+                <p className="text-sm text-slate-medium">Extra sleep per night</p>
               </div>
               <div>
-                <div className="text-3xl font-bold text-champagne-600">98%</div>
-                <p className="text-sm text-muted-foreground">Customer satisfaction</p>
+                <div className="text-3xl font-bold text-slate-dark">98%</div>
+                <p className="text-sm text-slate-medium">Customer satisfaction</p>
               </div>
             </div>
           </div>

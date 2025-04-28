@@ -67,8 +67,8 @@ const HowItWorks = () => {
     <section id="how-it-works" className="py-16 md:py-24 bg-slate-50">
       <div className="container px-4 md:px-6">
         <div ref={headerRef} className="flex flex-col items-center text-center space-y-4 mb-12 opacity-0">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">How Sonify Works</h2>
-          <p className="text-lg text-muted-foreground max-w-prose">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-dark">How Sonify Works</h2>
+          <p className="text-lg text-slate-medium max-w-prose">
             Our innovative approach uses a dual-method technology to both block and mask unwanted noise.
           </p>
         </div>
@@ -78,10 +78,10 @@ const HowItWorks = () => {
             <Card key={index} className="border-2 hover:border-sonify-purple transition-colors duration-300 h-full">
               <CardHeader className="pb-2">
                 <div className="text-3xl font-bold text-sonify-purple mb-2">{step.number}</div>
-                <CardTitle className="text-xl">{step.title}</CardTitle>
+                <CardTitle className="text-xl text-slate-dark">{step.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">{step.description}</CardDescription>
+                <CardDescription className="text-base text-slate-medium">{step.description}</CardDescription>
               </CardContent>
             </Card>
           ))}
@@ -119,12 +119,12 @@ const HowItWorks = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2">
-                <h3 className="text-2xl font-bold mb-4">Sound Reduction Performance</h3>
+                <h3 className="text-2xl font-bold mb-4 text-slate-dark">Sound Reduction Performance</h3>
                 <div className="space-y-4">
                   <div className="relative pt-1">
                     <div className="flex mb-2 items-center justify-between">
-                      <div className="text-sm font-semibold">Footsteps (Upstairs)</div>
-                      <div className="text-sm font-semibold">80%</div>
+                      <div className="text-sm font-semibold text-slate-dark">Footsteps (Upstairs)</div>
+                      <div className="text-sm font-semibold text-slate-dark">80%</div>
                     </div>
                     <div className="overflow-hidden h-2 bg-gray-200 rounded">
                       <div className="w-4/5 h-full bg-champagne-600 rounded"></div>
@@ -132,8 +132,8 @@ const HowItWorks = () => {
                   </div>
                   <div className="relative pt-1">
                     <div className="flex mb-2 items-center justify-between">
-                      <div className="text-sm font-semibold">TV Noise (Adjacent)</div>
-                      <div className="text-sm font-semibold">70%</div>
+                      <div className="text-sm font-semibold text-slate-dark">TV Noise (Adjacent)</div>
+                      <div className="text-sm font-semibold text-slate-dark">70%</div>
                     </div>
                     <div className="overflow-hidden h-2 bg-gray-200 rounded">
                       <div className="w-[70%] h-full bg-champagne-600 rounded"></div>
@@ -141,8 +141,8 @@ const HowItWorks = () => {
                   </div>
                   <div className="relative pt-1">
                     <div className="flex mb-2 items-center justify-between">
-                      <div className="text-sm font-semibold">Parties</div>
-                      <div className="text-sm font-semibold">65%</div>
+                      <div className="text-sm font-semibold text-slate-dark">Parties</div>
+                      <div className="text-sm font-semibold text-slate-dark">65%</div>
                     </div>
                     <div className="overflow-hidden h-2 bg-gray-200 rounded">
                       <div className="w-[65%] h-full bg-champagne-600 rounded"></div>
@@ -150,8 +150,8 @@ const HowItWorks = () => {
                   </div>
                   <div className="relative pt-1">
                     <div className="flex mb-2 items-center justify-between">
-                      <div className="text-sm font-semibold">Babies Crying</div>
-                      <div className="text-sm font-semibold">55%</div>
+                      <div className="text-sm font-semibold text-slate-dark">Babies Crying</div>
+                      <div className="text-sm font-semibold text-slate-dark">55%</div>
                     </div>
                     <div className="overflow-hidden h-2 bg-gray-200 rounded">
                       <div className="w-[55%] h-full bg-champagne-600 rounded"></div>
