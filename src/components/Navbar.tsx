@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
@@ -5,7 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Navbar = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="container flex items-center justify-between h-16 px-4 md:px-6">
         <div className="flex items-center gap-2">
           <div className="flex items-center">
@@ -18,27 +19,26 @@ const Navbar = () => {
         </div>
         
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#how-it-works" className="text-sm font-medium hover:text-sonify-purple transition-colors">
+          <a href="#how-it-works" className="text-sm font-medium text-slate-dark hover:text-book-cloth transition-colors">
             How It Works
           </a>
-          <a href="#benefits" className="text-sm font-medium hover:text-sonify-purple transition-colors">
+          <a href="#benefits" className="text-sm font-medium text-slate-dark hover:text-book-cloth transition-colors">
             Benefits
           </a>
-          <a href="#features" className="text-sm font-medium hover:text-sonify-purple transition-colors">
+          <a href="#features" className="text-sm font-medium text-slate-dark hover:text-book-cloth transition-colors">
             Features
           </a>
-          <a href="#testimonials" className="text-sm font-medium hover:text-sonify-purple transition-colors">
+          <a href="#testimonials" className="text-sm font-medium text-slate-dark hover:text-book-cloth transition-colors">
             Testimonials
           </a>
-          <a href="#faq" className="text-sm font-medium hover:text-sonify-purple transition-colors">
+          <a href="#faq" className="text-sm font-medium text-slate-dark hover:text-book-cloth transition-colors">
             FAQ
           </a>
         </nav>
         
         <div className="flex items-center gap-4">
           <Button
-            className="hidden md:flex"
-            variant="outline"
+            className="hidden md:flex bg-slate-dark text-white hover:bg-slate-medium"
             onClick={() => document.getElementById('order-now')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Order Now
@@ -53,23 +53,23 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent side="right">
               <nav className="flex flex-col gap-4 mt-8">
-                <a href="#how-it-works" className="text-base font-medium hover:text-sonify-purple transition-colors">
+                <a href="#how-it-works" className="text-base font-medium text-slate-dark hover:text-book-cloth transition-colors">
                   How It Works
                 </a>
-                <a href="#benefits" className="text-base font-medium hover:text-sonify-purple transition-colors">
+                <a href="#benefits" className="text-base font-medium text-slate-dark hover:text-book-cloth transition-colors">
                   Benefits
                 </a>
-                <a href="#features" className="text-base font-medium hover:text-sonify-purple transition-colors">
+                <a href="#features" className="text-base font-medium text-slate-dark hover:text-book-cloth transition-colors">
                   Features
                 </a>
-                <a href="#testimonials" className="text-base font-medium hover:text-sonify-purple transition-colors">
+                <a href="#testimonials" className="text-base font-medium text-slate-dark hover:text-book-cloth transition-colors">
                   Testimonials
                 </a>
-                <a href="#faq" className="text-base font-medium hover:text-sonify-purple transition-colors">
+                <a href="#faq" className="text-base font-medium text-slate-dark hover:text-book-cloth transition-colors">
                   FAQ
                 </a>
                 <Button
-                  className="mt-4 w-full"
+                  className="mt-4 w-full bg-slate-dark text-white hover:bg-slate-medium"
                   onClick={() => document.getElementById('order-now')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Order Now
