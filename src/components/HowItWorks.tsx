@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 
 const HowItWorks = () => {
@@ -120,42 +121,34 @@ const HowItWorks = () => {
               </div>
               <div className="w-full md:w-1/2">
                 <h3 className="text-2xl font-bold mb-4 text-slate-dark">Sound Reduction Performance</h3>
-                <div className="space-y-4">
-                  <div className="relative pt-1">
+                <div className="space-y-6">
+                  <div>
                     <div className="flex mb-2 items-center justify-between">
                       <div className="text-sm font-semibold text-slate-dark">Footsteps (Upstairs)</div>
                       <div className="text-sm font-semibold text-slate-dark">80%</div>
                     </div>
-                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
-                      <div className="w-4/5 h-full bg-champagne-600 rounded"></div>
-                    </div>
+                    <Progress value={80} className="h-2" />
                   </div>
-                  <div className="relative pt-1">
+                  <div>
                     <div className="flex mb-2 items-center justify-between">
                       <div className="text-sm font-semibold text-slate-dark">TV Noise (Adjacent)</div>
                       <div className="text-sm font-semibold text-slate-dark">70%</div>
                     </div>
-                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
-                      <div className="w-[70%] h-full bg-champagne-600 rounded"></div>
-                    </div>
+                    <Progress value={70} className="h-2" />
                   </div>
-                  <div className="relative pt-1">
+                  <div>
                     <div className="flex mb-2 items-center justify-between">
                       <div className="text-sm font-semibold text-slate-dark">Parties</div>
                       <div className="text-sm font-semibold text-slate-dark">65%</div>
                     </div>
-                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
-                      <div className="w-[65%] h-full bg-champagne-600 rounded"></div>
-                    </div>
+                    <Progress value={65} className="h-2" />
                   </div>
-                  <div className="relative pt-1">
+                  <div>
                     <div className="flex mb-2 items-center justify-between">
                       <div className="text-sm font-semibold text-slate-dark">Babies Crying</div>
                       <div className="text-sm font-semibold text-slate-dark">55%</div>
                     </div>
-                    <div className="overflow-hidden h-2 bg-gray-200 rounded">
-                      <div className="w-[55%] h-full bg-champagne-600 rounded"></div>
-                    </div>
+                    <Progress value={55} className="h-2" />
                   </div>
                 </div>
               </div>
