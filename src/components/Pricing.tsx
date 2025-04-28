@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -13,7 +14,7 @@ const Pricing = () => {
   };
 
   return (
-    <section id="order-now" className="py-16 md:py-24 bg-secondary">
+    <section id="order-now" className="py-16 md:py-24 bg-white">
       <div className="container px-4 md:px-6">
         <div ref={headerRef} className="flex flex-col items-center text-center space-y-4 mb-12 opacity-0">
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-dark">Proven Results</h2>
@@ -22,7 +23,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 bg-white p-8 rounded-xl shadow-sm">
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-slate-dark mb-2">75%</div>
             <div className="text-lg text-slate-medium">Average noise reduction</div>
