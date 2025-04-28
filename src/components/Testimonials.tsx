@@ -49,22 +49,22 @@ const Testimonials = () => {
 
         <div ref={testimonialsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-0">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border hover:shadow-md transition-shadow duration-300 h-full">
+            <Card key={index} className="border hover:shadow-md transition-shadow duration-300 h-full bg-slate-dark text-white">
               <CardHeader className="pb-2">
                 <svg className="h-8 w-8 text-sonify-purple/40" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
                 </svg>
               </CardHeader>
               <CardContent>
-                <p className="text-lg italic mb-4 text-slate-dark">{testimonial.quote}</p>
+                <p className="text-lg italic mb-4 text-white">{testimonial.quote}</p>
               </CardContent>
               <CardFooter className="flex items-center gap-4 pt-2">
                 <Avatar>
                   <AvatarFallback className="bg-sonify-purple text-white">{testimonial.avatar}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h4 className="font-semibold text-slate-dark">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-medium">{testimonial.role}</p>
+                  <h4 className="font-semibold text-white">{testimonial.name}</h4>
+                  <p className="text-sm text-gray-300">{testimonial.role}</p>
                 </div>
               </CardFooter>
             </Card>

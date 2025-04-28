@@ -75,13 +75,13 @@ const HowItWorks = () => {
 
         <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-0">
           {steps.map((step, index) => (
-            <Card key={index} className="border-2 hover:border-sonify-purple transition-colors duration-300 h-full">
+            <Card key={index} className="border-2 hover:border-sonify-purple transition-colors duration-300 h-full bg-slate-dark text-white">
               <CardHeader className="pb-2">
                 <div className="text-3xl font-bold text-sonify-purple mb-2">{step.number}</div>
-                <CardTitle className="text-xl text-slate-dark">{step.title}</CardTitle>
+                <CardTitle className="text-xl text-white">{step.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base text-slate-medium">{step.description}</CardDescription>
+                <CardDescription className="text-base text-gray-300">{step.description}</CardDescription>
               </CardContent>
             </Card>
           ))}

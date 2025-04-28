@@ -16,8 +16,8 @@ const Pricing = () => {
     <section id="order-now" className="py-16 md:py-24 bg-secondary">
       <div className="container px-4 md:px-6">
         <div ref={headerRef} className="flex flex-col items-center text-center space-y-4 mb-12 opacity-0">
-          <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Proven Results</h2>
-          <p className="text-lg text-muted-foreground">
+          <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-slate-dark">Proven Results</h2>
+          <p className="text-lg text-slate-medium">
             Experience premium sound control with Sonify Sound.
           </p>
         </div>
@@ -46,7 +46,7 @@ const Pricing = () => {
                   <span className="text-4xl font-bold text-slate-dark">$400</span>
                   <span className="ml-2 text-slate-medium">USD</span>
                 </div>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-8 text-slate-medium">
                   <li className="flex items-start">
                     <svg className="h-5 w-5 text-sonify-purple mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
@@ -80,7 +80,7 @@ const Pricing = () => {
                 </ul>
               </div>
               <div className="flex items-center text-sm text-slate-medium space-x-2 mb-4">
-                <svg className="h-5 w-5 text-slate-medium" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
                 </svg>
                 <span>Secure payment processing</span>
